@@ -20,11 +20,20 @@ window.onload = async () => {
         const recompensa = document.createElement('h2')
 
         if (personatge.bounties = []) {
-            recompensa.innerText = "No te recompensa";
+            recompensa.innerText = '';
         } else {
             for (const bounty of personatge.bounties) {
                 if (personatge.bounty.is_active = true) {
-                    recompensa.innerText = personatge.bounty.amount;
+                    recompensa.innerText = 'Recompensa de: ' + personatge.bounty.amount;
+
+                    const bountyButton = document.createElement('button');
+                    bountyButton.innerText = 'Capturar';
+                    personatgeDiv.appendChild(bountyButton);
+
+                    bountyButton.onclick = async () => {
+                        await afegirRecompensa()
+                        bountyButton.innerText = 'Capturat!!!';
+                    }
                 }
             }
         }
@@ -43,9 +52,54 @@ async function fetchPersonatges() {
 async function fetchBusqueda(busqueda) {
     const response = await fetch(`${apiUrl}/characters?q=${busqueda}`);
     const data = await response.json();
+    const llistaBusqueda = document.getElementById('llistaBusqueda');
+    llistaBusqueda.innerHTML = '';
+    llistaBusqueda.innerText = '';
 
-    for (personatge of data) {
+    for (const personatge of data) {
 
+        const personatgeDiv = document.createElement('div')
+
+        const nom = document.createElement('h4');
+        nom.innerText = personatge.name.en
+        personatgeDiv.appendChild(nom);
+
+        const imatge = document.createElement('img');
+        imatge.src = personatge.image_url;
+        personatgeDiv.appendChild(imatge);
+
+        const recompensa = document.createElement('h2')
+
+        if (personatge.bounties = []) {
+            recompensa.innerText = '';
+        } else {
+            for (const bounty of personatge.bounties) {
+                if (personatge.bounty.is_active = true) {
+                    recompensa.innerText = 'Recompensa de: ' + personatge.bounty.amount;
+                }
+            }
+        }
+        personatgeDiv.appendChild(recompensa);
+
+        llistaBusqueda.appendChild(personatgeDiv)
     }
+
+    if(llistaBusqueda.innerHTML = ''){
+        llistaBusqueda.innerText = 'Personatge no trobat.'
+    }
+}
+
+
+const numeroRecompenses = document.getElementById('numeroRecompenses');
+numeroRecompenses.innerText = '0';
+
+async function afegirRecompensa(recompensa) {
+    numeroRecompenses.innerText = numeroRecompenses.innerText + recompensa;
+    return true;
+}
+
+async function eliminarRecompensa(recompensa) {
+    numeroRecompenses.innerText = numeroRecompenses.innerText + recompensa;
+    return true;
 }
 

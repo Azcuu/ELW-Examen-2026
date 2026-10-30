@@ -14,9 +14,12 @@
     <h3>La meva pagina de One Piece</h3>
 
     <section id="buscador">
+        <h2>Buscador</h2>
         <form>
-            <button id="botoBusqueda" onclick="botobusqueda(busqueda)">Buscar</button>
+            <input type="name" id="nomBusqueda" placeholder="Buscar..." required>
+            <button id="botoBusqueda" onclick="fetchBusqueda(busqueda)">Buscar</button>
         </form>
+        <div id="llistaBusqueda"></div>
 
     </section>
 
@@ -30,10 +33,11 @@
 
     <div id="recompenses">
         <h2>Recompenses</h2>
+        <div id="numeroRecompenses"></div>
     </div>
 
     <div id="fruites">
-        <h3>Fruites</h3>
+        <h2>Fruites</h2>
     </div>
 
 </body>
