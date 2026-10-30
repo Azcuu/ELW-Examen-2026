@@ -3,7 +3,7 @@ console.log('tot ok');
 const apiUrl = 'http://localhost:3000/api/onepiece/characters';
 
 window.onload = async () => {
-    let personatges = await fetchPersonatges(0);
+    let personatges = await fetchPersonatges(1);
     const llistaPersonatges = document.getElementById('llistaPersonatges');
 
     for (const personatge of personatges) {
@@ -19,13 +19,10 @@ window.onload = async () => {
 
         const recompensa = document.createElement('h2')
         for (const bounty of personatge.bounties) {
-            if(bounty.amount == null){
-                
-            }
-
-            if (bounty.is_active == true) {
-                if (bounty.amount == null)
-                    recompensa.innerText = bounty.amount;
+            if (bounty.amount = null) {
+                recompensa.innerText = "No te recompensa";
+            } else if (bounty.is_active == true) {
+                recompensa.innerText = bounty.amount;
             }
         }
     }
@@ -48,7 +45,7 @@ window.onload = async () => {
 
     llistaPersonatges.appendChild(personatgeDiv)
 }
-}
+
 
 async function fetchPersonatges(page) {
     const response = await fetch(`${apiUrl}?page=${page}&limit=10`);
@@ -60,11 +57,10 @@ async function fetchBusqueda(busqueda) {
     const response = await fetch(`${apiUrl}?q=${busqueda}`);
     const data = await response.json();
     const llistaBusqueda = document.getElementById('llistaBusqueda');
-    llistaBusqueda.innerHTML = '';
-    llistaBusqueda.innerText = '';
+    llistaBusqueda.innerHTML = ''
+    llistaBusqueda.innerText = ''
 
     for (const personatge of data) {
-
         const personatgeDiv = document.createElement('div')
 
         const nom = document.createElement('h4');
@@ -78,35 +74,42 @@ async function fetchBusqueda(busqueda) {
         const recompensa = document.createElement('h2')
 
         if (personatge.bounties = []) {
-            recompensa.innerText = '';
+            recompensa.innerText = 'No te recompensa';
         } else {
             for (const bounty of personatge.bounties) {
-                if (bounty.is_active = true) {
+                if (bounty.is_active == true) {
                     recompensa.innerText = toString(bounty.amount);
+
+                    const bountyButton = document.createElement('button');
+                    bountyButton.innerText = 'Capturar';
+                    personatgeDiv.appendChild(bountyButton);
+
+                    bountyButton.onclick = async () => {
+                        await afegirRecompensa()
+                        bountyButton.innerText = 'Capturat!!!';
+                    }
                 }
             }
         }
         personatgeDiv.appendChild(recompensa);
 
+        personatgeDiv.onclick = async () => {
+            const edat = document.createElement('h4');
+            if (personatge.age == null) {
+                edat.innerText = "Edat desconeguda."
+            } else {
+                edat.innerText = personatge.age
+                console.log(personatge.age)
+            }
+            personatgeDiv.appendChild(edat);
+
+            const status = document.createElement('h4');
+            status.innerText = personatge.status
+            personatgeDiv.appendChild(status);
+        }
+
         llistaBusqueda.appendChild(personatgeDiv)
     }
-
-    if (llistaBusqueda.innerHTML = '') {
-        llistaBusqueda.innerText = 'Personatge no trobat.'
-    }
-}
-
-
-const numeroRecompenses = document.getElementById('numeroRecompenses');
-
-async function afegirRecompensa(recompensa) {
-    numeroRecompenses.innerText = toInt(numeroRecompenses.innerText) + recompensa;
-    return true;
-}
-
-async function eliminarRecompensa(recompensa) {
-    numeroRecompenses.innerText = toInt(numeroRecompenses.innerText) + recompensa;
-    return true;
 }
 
 let pagina = 0;
