@@ -19,25 +19,36 @@ window.onload = async () => {
 
         const recompensa = document.createElement('h2')
 
-        if (personatge.bounties = []) {
+        if (personatge.bounties = '') {
             recompensa.innerText = 'No te recompensa';
         } else {
             for (const bounty of personatge.bounties) {
                 if (bounty.is_active == true) {
-                    recompensa.innerText = bounty.amount;
-
+                    recompensa.innerText = toString(bounty.amount);
+                    console(bounty.amount)
                     const bountyButton = document.createElement('button');
                     bountyButton.innerText = 'Capturar';
-                    personatgeDiv.appendChild(bountyButton);
+                    
 
                     bountyButton.onclick = async () => {
                         await afegirRecompensa()
                         bountyButton.innerText = 'Capturat!!!';
                     }
+                    personatgeDiv.appendChild(bountyButton);
                 }
             }
         }
         personatgeDiv.appendChild(recompensa);
+
+        personatgeDiv.onclick = async () => {
+            const edat = document.createElement('h4');
+            edat.innerText = toString(personatge.age)
+            personatgeDiv.appendChild(edat);
+
+            const status = document.createElement('h4');
+            status.innerText = personatge.status
+            personatgeDiv.appendChild(status);
+        }
 
         llistaPersonatges.appendChild(personatgeDiv)
     }
@@ -75,7 +86,7 @@ async function fetchBusqueda(busqueda) {
         } else {
             for (const bounty of personatge.bounties) {
                 if (bounty.is_active = true) {
-                    recompensa.innerText = 'Recompensa de: ' + bounty.amount;
+                    recompensa.innerText = toString(bounty.amount);
                 }
             }
         }
@@ -93,12 +104,12 @@ async function fetchBusqueda(busqueda) {
 const numeroRecompenses = document.getElementById('numeroRecompenses');
 
 async function afegirRecompensa(recompensa) {
-    numeroRecompenses.innerText = numeroRecompenses.innerText + recompensa;
+    numeroRecompenses.innerText = toInt(numeroRecompenses.innerText) + recompensa;
     return true;
 }
 
 async function eliminarRecompensa(recompensa) {
-    numeroRecompenses.innerText = numeroRecompenses.innerText + recompensa;
+    numeroRecompenses.innerText = toInt(numeroRecompenses.innerText) + recompensa;
     return true;
 }
 
@@ -108,9 +119,11 @@ async function fetchLlistaAnterior() {
     if (pagina == 0) {
         alert("No hi ha menys pagines.")
     } else {
-         let personatges = await fetchPersonatges(pagina - 1);
+        let personatges = await fetchPersonatges(pagina - 1);
         pagina = pagina - 1;
         const llistaPersonatges = document.getElementById('llistaPersonatges');
+        llistaPersonatges.innerHTML = ''
+        llistaPersonatges.innerText = ''
 
         for (const personatge of personatges) {
             const personatgeDiv = document.createElement('div')
@@ -144,6 +157,16 @@ async function fetchLlistaAnterior() {
                 }
             }
             personatgeDiv.appendChild(recompensa);
+
+            personatgeDiv.onclick = async () => {
+                const edat = document.createElement('h4');
+                edat.innerText = toString(personatge.age)
+                personatgeDiv.appendChild(edat);
+
+                const status = document.createElement('h4');
+                status.innerText = personatge.status
+                personatgeDiv.appendChild(status);
+            }
 
             llistaPersonatges.appendChild(personatgeDiv)
         }
@@ -158,6 +181,8 @@ async function fetchLlistaSeguent() {
         let personatges = await fetchPersonatges(pagina + 1);
         pagina = pagina + 1;
         const llistaPersonatges = document.getElementById('llistaPersonatges');
+        llistaPersonatges.innerHTML = ''
+        llistaPersonatges.innerText = ''
 
         for (const personatge of personatges) {
             const personatgeDiv = document.createElement('div')
@@ -177,7 +202,7 @@ async function fetchLlistaSeguent() {
             } else {
                 for (const bounty of personatge.bounties) {
                     if (bounty.is_active == true) {
-                        recompensa.innerText = bounty.amount;
+                        recompensa.innerText = toString(bounty.amount);
 
                         const bountyButton = document.createElement('button');
                         bountyButton.innerText = 'Capturar';
@@ -191,6 +216,16 @@ async function fetchLlistaSeguent() {
                 }
             }
             personatgeDiv.appendChild(recompensa);
+
+            personatgeDiv.onclick = async () => {
+                const edat = document.createElement('h4');
+                edat.innerText = toString(personatge.age)
+                personatgeDiv.appendChild(edat);
+
+                const status = document.createElement('h4');
+                status.innerText = personatge.status
+                personatgeDiv.appendChild(status);
+            }
 
             llistaPersonatges.appendChild(personatgeDiv)
         }
