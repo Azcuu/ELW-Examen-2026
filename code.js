@@ -1,6 +1,6 @@
 console.log('tot ok');
 
-const apiUrl = 'https://localhost:3000/api/onepiece/characters';
+const apiUrl = 'http://localhost:3000/api/onepiece/characters';
 
 window.onload = async () => {
     let personatges = await fetchPersonatges();
@@ -18,13 +18,13 @@ window.onload = async () => {
         personatgeDiv.appendChild(imatge);
 
         const recompensa = document.createElement('h2')
-        for (bounty of bounties) {
+        for (bounty of personatge.bounties) {
             if (personatge.bounties.is_active = true){
-                recompensa.innerText = personatge.bounties.amount
+                recompensa.innerText = personatge.bounties.amount;
                 personatgeDiv.appendChild(recompensa);
-
-
-                const botoRecompensa = document.createElement('button')
+            } else {
+                recompensa.innerText = "No te recompensa";
+                personatgeDiv.appendChild(recompensa);
             }
         }
 
