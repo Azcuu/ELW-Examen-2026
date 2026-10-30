@@ -18,40 +18,36 @@ window.onload = async () => {
         personatgeDiv.appendChild(imatge);
 
         const recompensa = document.createElement('h2')
+        for (const bounty of personatge.bounties) {
+            if(bounty.amount == null){
+                
+            }
 
-        if (personatge.bounties = '') {
-            recompensa.innerText = 'No te recompensa';
-        } else {
-            for (const bounty of personatge.bounties) {
-                if (bounty.is_active == true) {
-                    recompensa.innerText = toString(bounty.amount);
-                    console(bounty.amount)
-                    const bountyButton = document.createElement('button');
-                    bountyButton.innerText = 'Capturar';
-                    
-
-                    bountyButton.onclick = async () => {
-                        await afegirRecompensa()
-                        bountyButton.innerText = 'Capturat!!!';
-                    }
-                    personatgeDiv.appendChild(bountyButton);
-                }
+            if (bounty.is_active == true) {
+                if (bounty.amount == null)
+                    recompensa.innerText = bounty.amount;
             }
         }
-        personatgeDiv.appendChild(recompensa);
-
-        personatgeDiv.onclick = async () => {
-            const edat = document.createElement('h4');
-            edat.innerText = toString(personatge.age)
-            personatgeDiv.appendChild(edat);
-
-            const status = document.createElement('h4');
-            status.innerText = personatge.status
-            personatgeDiv.appendChild(status);
-        }
-
-        llistaPersonatges.appendChild(personatgeDiv)
     }
+    personatgeDiv.appendChild(recompensa);
+
+    personatgeDiv.onclick = async () => {
+        const edat = document.createElement('h4');
+        if (personatge.age == null) {
+            edat.innerText = "Edat desconeguda."
+        } else {
+            edat.innerText = personatge.age
+            console.log(personatge.age)
+        }
+        personatgeDiv.appendChild(edat);
+
+        const status = document.createElement('h4');
+        status.innerText = personatge.status
+        personatgeDiv.appendChild(status);
+    }
+
+    llistaPersonatges.appendChild(personatgeDiv)
+}
 }
 
 async function fetchPersonatges(page) {
@@ -160,7 +156,12 @@ async function fetchLlistaAnterior() {
 
             personatgeDiv.onclick = async () => {
                 const edat = document.createElement('h4');
-                edat.innerText = toString(personatge.age)
+                if (personatge.age == null) {
+                    edat.innerText = "Edat desconeguda."
+                } else {
+                    edat.innerText = personatge.age
+                    console.log(personatge.age)
+                }
                 personatgeDiv.appendChild(edat);
 
                 const status = document.createElement('h4');
@@ -219,7 +220,12 @@ async function fetchLlistaSeguent() {
 
             personatgeDiv.onclick = async () => {
                 const edat = document.createElement('h4');
-                edat.innerText = toString(personatge.age)
+                if (personatge.age == null) {
+                    edat.innerText = "Edat desconeguda."
+                } else {
+                    edat.innerText = personatge.age
+                    console.log(personatge.age)
+                }
                 personatgeDiv.appendChild(edat);
 
                 const status = document.createElement('h4');
