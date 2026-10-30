@@ -6,7 +6,7 @@ window.onload = async () => {
     let personatges = await fetchPersonatges();
     const llistaPersonatges = document.getElementById('llistaPersonatges');
 
-    for (const personatge of personatges){
+    for (const personatge of personatges) {
         const personatgeDiv = document.createElement('div')
 
         const nom = document.createElement('h4');
@@ -18,15 +18,17 @@ window.onload = async () => {
         personatgeDiv.appendChild(imatge);
 
         const recompensa = document.createElement('h2')
-        for (bounty of personatge.bounties) {
-            if (personatge.bounties.is_active = true){
-                recompensa.innerText = personatge.bounties.amount;
-                personatgeDiv.appendChild(recompensa);
-            } else {
-                recompensa.innerText = "No te recompensa";
-                personatgeDiv.appendChild(recompensa);
+
+        if (personatge.bounties = []) {
+            recompensa.innerText = "No te recompensa";
+        } else {
+            for (const bounty of personatge.bounties) {
+                if (personatge.bounty.is_active = true) {
+                    recompensa.innerText = personatge.bounty.amount;
+                }
             }
         }
+        personatgeDiv.appendChild(recompensa);
 
         llistaPersonatges.appendChild(personatgeDiv)
     }
@@ -41,7 +43,7 @@ async function fetchPersonatges() {
 async function fetchBusqueda(busqueda) {
     const response = await fetch(`${apiUrl}/characters?q=${busqueda}`);
     const data = await response.json();
-    
+
     for (personatge of data) {
 
     }
