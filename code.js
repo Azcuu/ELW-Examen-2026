@@ -1,6 +1,6 @@
 console.log('tot ok');
 
-const apiUrl = 'https://onepieceapi.com/api/characters?limit=10';
+const apiUrl = 'https://bn9ct5dd-3000.uks1.devtunnels.ms/?limit=10';
 
 let personatges = [];
 
@@ -19,6 +19,9 @@ window.onload = async () => {
         imatge.src = personatge.image_url;
         personatgeDiv.appendChild(imatge);
 
+        const recompensa = document.createElement('h2')
+        recompensa.innerText = personatge.
+
         llistaPersonatges.appendChild(personatgeDiv)
     }
 }
@@ -29,4 +32,14 @@ async function fetchPersonatges() {
     return data;
 }
 
+async function buscarPersonatges(busqueda) {
+
+    
+}
+
+async function fetchBusqueda(busqueda) {
+    const response = await fetch(`${apiUrl}/characters?q=${busqueda}`);
+    const data = await response.json();
+    return data;
+}
 
