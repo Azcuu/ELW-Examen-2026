@@ -20,11 +20,11 @@ window.onload = async () => {
         const recompensa = document.createElement('h2')
 
         if (personatge.bounties = []) {
-            recompensa.innerText = '';
+            recompensa.innerText = 'No te recompensa';
         } else {
             for (const bounty of personatge.bounties) {
-                if (personatge.bounty.is_active = true) {
-                    recompensa.innerText = 'Recompensa de: ' + personatge.bounty.amount;
+                if (bounty.is_active == true) {
+                    recompensa.innerText = bounty.amount;
 
                     const bountyButton = document.createElement('button');
                     bountyButton.innerText = 'Capturar';
@@ -50,7 +50,7 @@ async function fetchPersonatges() {
 }
 
 async function fetchBusqueda(busqueda) {
-    const response = await fetch(`${apiUrl}/characters?q=${busqueda}`);
+    const response = await fetch(`${apiUrl}?q=${busqueda}`);
     const data = await response.json();
     const llistaBusqueda = document.getElementById('llistaBusqueda');
     llistaBusqueda.innerHTML = '';
@@ -74,8 +74,8 @@ async function fetchBusqueda(busqueda) {
             recompensa.innerText = '';
         } else {
             for (const bounty of personatge.bounties) {
-                if (personatge.bounty.is_active = true) {
-                    recompensa.innerText = 'Recompensa de: ' + personatge.bounty.amount;
+                if (bounty.is_active = true) {
+                    recompensa.innerText = 'Recompensa de: ' + bounty.amount;
                 }
             }
         }
@@ -91,7 +91,6 @@ async function fetchBusqueda(busqueda) {
 
 
 const numeroRecompenses = document.getElementById('numeroRecompenses');
-numeroRecompenses.innerText = '0';
 
 async function afegirRecompensa(recompensa) {
     numeroRecompenses.innerText = numeroRecompenses.innerText + recompensa;

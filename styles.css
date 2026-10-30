@@ -12,6 +12,6 @@ body img {
 }
 
 #recompenses {
-    position: sticky;
-    top: 0;
+    display: sticky;
+    bottom: 0;
 }
